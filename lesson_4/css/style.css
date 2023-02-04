@@ -1,0 +1,186 @@
+/* Reset styles */
+@import url("reset.css");
+                    /*    Шрифти             */
+                    
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,500,,700&display=swap);
+body{
+  font-family: "Poppins"; 
+ }                  
+
+ @font-face{
+    font-family:"CircularStd" ;
+    src: url("../fonts/CircularStd-Bold.woff")format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face{
+    font-family:"СircularStd";
+    src: url("../fonts/CircularStd-Book.woff")format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+body{
+    font-family: "Poppins",sans-serif;    
+    font-size: 14px;
+    font-weight: 300;
+    color:green;  
+}
+
+.title{
+    font-family: "Solitreo";
+}
+/* Підключення шрифтів */
+
+
+
+/* CSS Властивості шрифтів */
+/* Встановлює родину шрифту
+font-family:Ім'я шрифту.Тип шрифту.успадковується
+
+Типи шрифтів:
+serif-шрифт з зарубками(засічками)
+sans-seif-рублений(без зарубок)
+cursive-курсивні шрифти
+fantasy-декоративні
+momspace-моноширенні
+*/
+.title{
+    font-family: "CircularStd","sans-serif";
+}
+/* Встановлює розмір шрифту
+font-size:цифрове значення одиниця виміру.
+(за замовчуванням 16рх.якщо в браузері не вказано іншого)
+успадковується */
+.title{
+    font-size: 20px;
+    
+}
+/*  Встановлює стиль шрифту
+font-style:назва стилю.
+успадковується
+
+normal(за азмовчуванням)-звичайний(не змынений.стандартний)
+italic-курсив
+oblique-нахилення літер*/
+
+.title{
+    
+    font-style: italic;
+}
+.text{
+text-align: justify;
+}
+/* Встановлює насиченість(товщину)шрифту
+font-weight:цифрове значення або значення словом(словесне).успадковується */
+
+/* 
+100-thin
+300-lite
+400-Regular(normal)(за замовчуванням)
+500-medium
+600-semibold 
+700-bold
+900-black
+*/
+
+.title{
+    font-weight: 700;
+}
+
+/* CSS властивості тектсу
+Встановлює колір тексту
+color-слово або код кольру.
+ */
+ .title{
+    color:rgb(76, 143, 76) ;
+ }
+ /* Прозорість */
+
+ /* Встановлює вирівнювання тексту
+ text-align-значення
+ успадковується текстом
+ 
+ center-вирівнює по тексту
+ left-вирівнює по лівому краю
+ right-вирівнює по правому краю
+ justify-вирівнює текст по ширині об'єкту в якому він знаходиться автоматично змінюючи пробіли між словами
+ */
+
+.text{
+text-align: center;
+}
+
+
+/* Додоє тексту певне оформлення
+text-decoration-значення
+line-through-закреслює текст
+overline-лінія над текстом
+underline-лінія під текстом
+none-(за замовчуванням)відміняє змінений раніше параметр */
+
+/* Додає тексту тінь
+text-shadow-горизонтальне зміщення вертикальне зміщення.успадковується(текстом)
+може бути мульти-тінь(значення через кому
+ */
+ .text{
+    text-shadow: 2px 2px 5px color #000;
+ }
+
+ /* Встановлює тип (регістр)літер(прописні або заглавні)
+ text-transform-значення
+ успадковується текстом
+ capitalize-кожне слово починається з заглавної літери
+ lowercase-усі літери прописні(нижній регістр)
+ uppercase-усі літери заглавні(верхній регістр)
+ none(за замовчуванням)не змінює або відміняє значення */
+
+ .title{
+    text-transform: uppercase;
+ }
+.text{
+    text-transform: lowercase;
+}
+
+ /* Визначає міжрядковий інтервал(відстань)(висота рядка)
+ line-height -значення
+ Перевести пікселі в частини
+ значенняline-height поділити на значення font-size успадковується(текстом)*/
+
+ .text{
+    font-size: 20px;
+    line-height: 2;
+ }
+
+ /* Червона строка встановлює відступ зліва у першого рядка тексту
+ text-indent-значення
+успадковується(текстом) */
+.text{
+    text-indent: 20px;
+}
+/* Встановлює інтервал між літерами(символами)
+letter-spacing-значення успадковується текстом
+ */
+ .title{
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+ }
+ /* Управляє поведінкою пробілів між словами
+ white-space-значення
+ nowrap-забороняє переніс рядка
+ normal-(за замовчуванням)не змінює(або відміняє) значення успадковується текстом
+  */
+
+  .text{
+    white-space: normal;
+  }
+  /* Встановлює інтервал між словами
+  word-spacing-значення
+  успадковується (текстом) */
+
+  .text{
+    word-spacing: 20px;
+  }
