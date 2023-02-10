@@ -14,7 +14,7 @@ li {
     list-style: none;
 }
 img {
-    vertical-align: top;
+    vertical-align:top;
 }
 h1,
 h2,
@@ -33,12 +33,12 @@ body {
 textarea,
 button,
 input{
-    font-weight: inherit;
+    font-weight:inherit;
     font-size: inherit;
-    color: inherit;
+    color:inherit;
     font-family: inherit;
 }
 button{
     cursor:pointer;
-    background-color:inherit
+    background-color:inherit;
 }
