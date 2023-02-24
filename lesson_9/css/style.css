@@ -1,0 +1,116 @@
+@import url("reset.css");
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
+
+.body{
+    width: 100%;
+    margin: 0 auto;
+    font-size: 0;
+  
+}
+.header{
+    width: 100%;
+    margin: 0 auto;
+}
+.header__container{
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 100px 15px;
+}
+.header__title{
+    text-transform: uppercase;
+    font-size: 45px ;
+    font-family: "Poppins",serif;
+    font-weight: 700;
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+   position: relative;
+   display: inline-block;
+}
+.header__title::after{
+    content: "";
+    width:100%;
+    padding-bottom: 8px;
+    margin-top: 10px;
+    border-radius: 3px;
+    position: absolute;
+    display: block;
+}
+.main__container{
+	margin: 0 auto;
+	max-width: 1200px;
+	padding: 30px 15px;
+	font-size: 20px;
+	font-weight: 500;
+	font-family: "Inter" ,serif;
+}
+.icons{
+	border: 2px solid rgb(11, 2, 2);
+	border-radius: 25px;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+.icons{
+	border: 2px solid rgb(20, 6, 6);
+	border-radius: 25px;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+.icons__img{
+	background-color: #fff;
+	border-radius: 10px;
+	padding: 15px;
+	text-align: center;
+}
+.design{
+	border: 2px solid rgb(135, 240, 128);
+	border-radius: 25px;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.design__title{
+	font-weight: 700;
+	font-size: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+.design__img{
+	max-width: 400px;
+	margin: 0 auto;
+	text-align: center;
+}
+.design__img div, .design__img img{
+	display: block;
+	margin: 0 auto 50px;
+}
+.design__img img:not(last-child){
+	display: block;
+	margin-bottom: 50px;
+}
+.design__color{
+	background: url(../img/design-svg/color.png) 0 0 no-repeat;
+	height: 610px;
+	width: 370px;
+}
+.design__img img:last-child, .design__ img div:last-child{
+	margin-bottom: 10px;
+}
+.content{
+	border: 2px solid rgb(171, 128, 240);
+	border-radius: 25px;
+	padding: 20px;
+	margin-bottom: 20px;
+	width: 100%;
+}
+.content__title{
+	font-weight: 700;
+	font-size: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
