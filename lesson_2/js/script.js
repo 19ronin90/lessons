@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./js/script.js"></script>
-</head>
-<body>
-    
-    <script>
-//Задача№0
+document.write("hello")
+//task№0
 // Введення
 let a = parseFloat(prompt("Значення a", "0"))
 let b = parseFloat(prompt("Значення b", "0"))
@@ -33,7 +22,7 @@ document.write (`S4 = ${S4.toFixed(2)} <br>`)
       // console.log(`S3 = ${S3.toFixed(2)}`);
       // console.log(`S4 = ${S4.toFixed(2)}`);
       
-      //Задача№1
+      //task1
 
  //Введення
  let firstNumber = parseFloat(prompt("Перше число", "0"))
@@ -44,7 +33,7 @@ document.write (`S4 = ${S4.toFixed(2)} <br>`)
  let productNumbers = firstNumber*secondNumber;
  let fractionNumbers = firstNumber/secondNumber;   
 
- // 
+ // task2
  // console.log(`суму = ${sumNumbers}`);
  // console.log(`добуток = ${productNumbers}`);
  // console.log(`частку = ${fractionNumbers}`);
@@ -181,13 +170,3 @@ document.write (`S4 = ${S4.toFixed(2)} <br>`)
        document.write (`Сума випадкового номера місяця = ${totalRandomNumberMonth} <br>`)
        document.write (`Сума випадкового номера дня = ${totalRandomNumberDay} <br>`)
        document.write (`Сума випадкового номера = ${sumRandom} <br>`)
-
-
-
-
-
-
-
-    </script>
- </body>
- </html>   
