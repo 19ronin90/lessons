@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+    
+    <script>
+//Задача №1  З клавіатури вводяться імена двох дітей та кількість у них цукерок.
+// Вивести не екран ім’я тієї дитини, у якої кількість цукерок є більшою, або вивести, що кількість однакова.
+
+//1. Вводимо даннi
+let firstChildeName = prompt('Введiть ім’я першої дитини');
+let nextChildeName = prompt('Введiть ім’я другої дитини');
+let firstChildeCandys = prompt(`Введiть кількість цукерок у ${firstChildeName}`);
+let nextChildeCandys = prompt(`Введiть кількість цукерок у ${nextChildeName}`);
+
+//2. Знаходимо та Виводимо результат
+if (firstChildeCandys > nextChildeCandys){
+    document.write(`<h2>У ${firstChildeName} бiльше цукерок!!! <h2/>`);
+} else if (nextChildeCandys > firstChildeCandys){
+    document.write(`<h2>У ${nextChildeName} бiльше цукерок!!! <h2/>`);
+} else document.write(`<h2>У ${firstChildeName} и ${nextChildeName} однакова кількість цукерок!!! <h2/>`);
+
+//Задача№2 
+//  З клавіатури вводиться ціна товару і кількість грошей.
+// Якщо грошей не вистачає то відмовляємо у покупці, інакше, якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.
+ //1.Вводимо даннi
+ let price = parseFloat(prompt('Введiть ціну товару'));
+        let totalMony = parseFloat(prompt('Введiть кількість грошей'));
+
+        //2.Знаходимо та Виводимо результат
+        if (totalMony < price){
+            document.write(`<h2>У вас не вистачає грошей!!! <h2/>`);
+        } else if (totalMony > price){
+            document.write(`<h2> Пропонуємо купити лотерею за 4 грн.!!! <h2/>`);
+        } else document.write(`<h2> Дякуемо за покупку!!!))) <h2/>`);
+//Задача№3
+//Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.
+ //1.Вводимо даннi
+ let randomNumber = Math.floor(Math.random() * 5) + 1;
+
+let firstTry = parseInt(prompt('Введiть число вiд 1 до 5'));
+let secondTry = parseInt(prompt('Введiть число вiд 1 до 5'));
+
+//2. Знаходимо та Виводимо результат
+if (randomNumber === firstTry){
+    document.write('<h2> Ви молодець, вгадали число за 1 спробу! <h2/>');
+} else if (randomNumber === firstTry){
+    document.write('<h2> Ви молодець, вгадали число з 2 спроби! <h2/>');
+} else document.write('Ви не вгадали число. Загадане число: ' + randomNumber);
+//Задача№4
+//// 1. Вводимо дані
+let yourBirth = parseInt(prompt('Скiльки вам рокiв?'));
+        let kind = 7;
+        let schoolboy = 18;
+        let student = 24;
+        let worker = 59;
+        let pensioner = 60;
+
+        //2.Знаходимо та Виводимо результат
+        if (yourBirth <= kind){
+            document.write(`<h2> Ви ще дитина!!! <h2/>`);
+        }else if (yourBirth <= schoolboy){
+            document.write(`<h2> Ви школяр!!! <h2/>`);
+        }else if (yourBirth <= student){
+            document.write(`<h2> Ви студент!!! <h2/>`);
+        }else if (yourBirth <= worker){
+            document.write(`<h2> Ви працівник!!! <h2/>`);
+        }else document.write(`<h2> Ви вже пенсіонер!!! <h2/>`);
+//Задача№5
+//// 1. Вводимо дані
+let category = prompt('Яка у вас категорія водія?');
+        let categoryA = 'a';
+        let categoryB = 'b';
+        let categoryC = 'c';
+
+        //2.Знаходимо та Виводимо результат
+        if (category == categoryA){
+            document.write(`<h2> Ви можете керувати мотоциклом!!! <h2/>`);
+        }else if (category == categoryB){
+            document.write(`<h2> Ви можете керувати легковим автомобілем!!! <h2/>`);
+        }else if (category == categoryC){
+            document.write(`<h2> Ви можете керувати вантажним автомобілем!!! <h2/>`);
+        }else document.write(`<h2> Ви не можете керувати транспортним засобом!!! <h2/>`);
+         //Задача№6
+         // // 1. Вводимо дані
+        let valueDay = parseInt(prompt('Введiть номер дня тижня!'));
+        let monday = 1;
+        let tuesday = 2;
+        let wednesday = 3;
+        let thursday = 4;
+        let friday = 5;
+        let saturday = 6;
+        let sunday = 7;
+
+        //2.Знаходимо та Виводимо результат
+        if (valueDay === monday){
+            document.write(`<h2> Це Monday!!! <h2/>`);
+        } else if (valueDay === tuesday){
+            document.write(`<h2> Це Tuesday!!! <h2/>`);
+        } else if (valueDay === wednesday){
+            document.write(`<h2> Це Wednesday!!! <h2/>`);
+        } else if (valueDay === thursday){
+            document.write(`<h2> Це Thursday!!! <h2/>`);
+        } else if (valueDay === friday){
+            document.write(`<h2> Це Friday!!! <h2/>`);
+        } else if (valueDay === saturday){
+            document.write(`<h2> Це Saturday!!! <h2/>`);
+        } else document.write(`<h2> Це Sunday!!! <h2/>`);
+//Задача№7
+//// 1. Вводимо дані
+let monthNumber = parseInt(prompt("Введіть номер місяця!"));
+      
+      // Перевірка номеру місяця
+      if (monthNumber >= 1 && monthNumber <= 12) {
+        // Визначення пори року за номером місяця
+        let season;
+        if (monthNumber >= 3 && monthNumber <= 5) {
+          season = "весни";
+        } else if (monthNumber >= 6 && monthNumber <= 8) {
+          season = "літа";
+        } else if (monthNumber >= 9 && monthNumber <= 11) {
+          season = "осені";
+        } else {
+          season = "зими";
+        }
+    
+        // Виведення результату
+        document.write("<h2>Місяць номер " + monthNumber + " належить до " + season + ".</h2>");
+      } else {
+        document.write("<h2>Некоректний номер місяця. Будь ласка, введіть число від 1 до 12.</h2>");
+      }
+    </script>
+ </body>
+ </html>   
