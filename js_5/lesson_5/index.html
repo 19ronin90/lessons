@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+    
+    <script>
+// Задача 1. Поступово генерувати 100 випадкових чисел від 1 до 1000.
+      // Підрахувати яких чисел більше: парних чи непарних.
+      let evenCount = 0;
+      let oddCount = 0;
+      const minRandomNumber = 1;
+      const maxRandomNumber = 1000;
+
+      for (let countNumber = 0; countNumber < 100; countNumber++) {
+        let randomNumber =
+          minRandomNumber +
+          Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1));
+        if (randomNumber % 2 === 0) {
+          evenCount++;
+        } else {
+          oddCount++;
+        }
+      }
+
+      if (evenCount > oddCount) {
+        alert(
+          `Парних чисел - ${evenCount}\nНепарних чисел ${oddCount}\nПарних чисел більше!`
+        );
+      } else if (evenCount < oddCount) {
+        alert(
+          `Парних чисел - ${evenCount}\nНепарних чисел ${oddCount}\nНепарних чисел більше!`
+        );
+      } else {
+        alert(
+          `Парних чисел - ${evenCount}\nНепарних чисел ${oddCount}\nКількість парних і непарних однакова!`
+        );
+      }
+// Задача 2. Вивести на екран номери місяців весни і літа (від 3 до 8)
+let monthName = '';
+
+      for (let monthCount = 3; monthCount <= 8; monthCount++) {
+        let currentMonth = monthCount;
+        switch (currentMonth) {
+          case 3: 
+            monthName += `${currentMonth} - Березень<br>`;
+          break;
+          case 4: 
+            monthName += `${currentMonth} - Квітень<br>`;
+          break;
+          case 5:
+            monthName += `${currentMonth} - Травень<br>`;
+          break;
+          case 6:
+            monthName += `${currentMonth} - Червень<br>`;
+          break;
+          case 7:
+            monthName += `${currentMonth} - Липень<br>`;
+          break;
+          case 8:
+            monthName += `${currentMonth} - Серпень<br>`;
+          break;
+        
+          default:
+            break;
+        }
+      }
+
+      document.write(monthName);
+// Задача 3. Вивести з використанням циклів маркований список з
+      // випадковими числами (1-100). Кількість випадкових чисел вводиться
+      // користувачем
+      let userCount = parseInt(prompt("Введіть кількість пунктів списку", "5"));
+      const MinRandomNumber = 1;
+      const MaxRandomNumber = 100;
+      document.write(`<ul>`);
+      for (let i = 0; i < userCount; i++) {
+        let randomNumber =
+          minRandomNumber +
+          Math.floor(Math.random() * (maxRandomNumber - minRandomNumber + 1));
+        document.write(`<li style="list-style: inside;">${randomNumber}</li>`);
+      }
+      document.write(`</ul>`);
+ // Задача 4. Створити 10 елементів для введення цін продуктів
+ for (let inputCouunt = 1; inputCouunt <= 10; inputCouunt++) {
+        document.write(
+          `Product #${inputCouunt} <input type="text" style="border: 1px solid #000;"><br>`
+        );
+      }
+// Задача 5. Вивести таблицю з одним рядком і 7 стовпцями.
+document.write("<table><tr>");
+      for (let count = 1; count <= 7; count++) {
+        document.write(`<td>${count}</td>`);
+      }
+      document.write("</tr></table>");
+ </script>
