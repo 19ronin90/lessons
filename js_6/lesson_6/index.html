@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+    
+             <!-- Задача№1Використовуючи цикли вивести на екран 20 символів «о».. -->
+             <script>
+                let someO = "o"
+                for (let i = 0; i < 20; i++)
+                   document.write(`${someO}`)
+             </script>
+          <!-- Задача№2 Відобразити трикутник за допомогою символів «о» -->
+          <script>
+            let result = "o"
+            for (let i = 0; i < 7; i++) {
+               document.write(`${result}<br>`)
+               result += "o"
+            }
+         </script>
+          <!--Задача№3 Інвестор вклав S тис. грн на 20 років під 20% річних. Визначити за допомогою циклів суму, яку він одержить (без оподаткування). -->
+          Відповідь:<br>
+          <script>
+             let userDeposit = parseInt(prompt('Ваша сума вкладення:'))
+             let finalSum = userDeposit
+             const annualRate = 0.2
+             for (let i = 0; i < 20; i++) {
+                finalSum += userDeposit*annualRate
+             }
+             document.write(`Ви одержите ${finalSum} тис. грн.`)
+          </script>
+            <!--Задача№4 Вивести на екран
+A B C D E 
+B C D E F 
+C D E F G 
+D E F G H 
+E F G H I
+-->
+Відповідь:<br>
+<script>
+   let firstLetter = 65
+   let lastLetter = 69
+   for (firstLetter = 65; firstLetter <= lastLetter; firstLetter++) {
+      for (let i = 0; i < 5; i++) {
+      document.write(`${String.fromCharCode(firstLetter + i)}`)
+      }
+      document.write(`<br>`)
+   }
+</script>
+<!-- Задача№5 Вивести на екран усі двоцифрові числа, у яких перша цифра є більшою або рівною за другу. -->
+Відповідь:<br>
+<script>
+   let numOne, numTwo
+   for(numOne = 1; numOne <= 9; numOne++){
+      for(numTwo = 0; numTwo <= numOne; numTwo++)
+      document.write(`${numOne}${numTwo}<br>`)
+   }
+</script>
+</body>
+</html>
