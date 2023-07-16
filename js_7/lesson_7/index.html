@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+   // Задача№0 Створити функцію, яка за номером місяця повертає пору року, до якої відноситься цей місяць.//
+   function season(monthNum) {
+      switch (monthNum) {
+         case 12:
+         case 1:
+         case 2: return "Зима"   
+         case 3:
+         case 4:
+         case 5: return "Весна" 
+         case 6: 
+         case 7: 
+         case 8: return "Літо"
+         case 9: 
+         case 10: 
+         case 11: return "Осінь"  
+      
+         default:
+            return "Нажаль ви не правильно ввели номер"
+      }
+   }
+
+   const UserMonthNum = parseInt(prompt("Введіть будь-ласка номер місяця від 1 до 12"))
+   alert(season(UserMonthNum))
+   </script>
+<script>
+   // Задача 1. Створити функцію, яка за номером місяця повертає його назву.
+   function getNameMonth(monthNum) {
+         switch (monthNum) {
+            case 1: return "Січень"
+            case 2: return "Лютий"
+            case 3: return "Березень"
+            case 4: return "Квітень"
+            case 5: return "Травень"
+            case 6: return "Червень"
+            case 7: return "Липень"
+            case 8: return "Серпень"
+            case 9: return "Вересень"
+            case 10: return "Жовтень"
+            case 11: return "Листопад"
+            case 12: return "Грудень"
+               
+               
+         
+            default:
+               return "Нажаль місяця з таким номером не існує"
+         }
+      }
+      let userMonthNum = parseInt(prompt("Введіть будь-ласка номер місяця від 1 до 12"))
+      alert(getNameMonth(userMonthNum))
+</script>
+<script>
+      // Задача 3. Створити окремі функції, які для 4 чисел знаходять:
+// 1)суму;
+// 2)добуток;
+// 3)середнє арифметичне;
+// 4)мінімальне значення. 
+
+// функція для отримання суми чотирьох чисел
+
+let sumOfForthNum  = (num1,num2,num3,num4) => num1 + num2 + num3 + num4;
+
+document.write(`Сума чотирьох чисел = ${sumOfForthNum(2,5,8,9)}<br>`)
+// функція для отримання добутку чотирьох чисел
+
+let multiplyOfForthNum = (num1,num2,num3,num4) => num1*num2*num3*num4;
+document.write(`Добуток чотирьох чисел = ${multiplyOfForthNum(2,8,9,10)}<br>`)
+
+// функція для отримання середнього арифмитичного чила з чотирьох чисел
+
+let averageOfForthNum = (num1,num2,num3,num4) => (num1+num2+num3+num4)/4;
+document.write(`Середнє арифметичне число з чотирьох чисел = ${averageOfForthNum(2,5,9,1)}<br>`)
+
+// функція для отримання мінімального значення з 4 чисел
+
+function minNumAmongForthNum(num1,num2,num3,num4) {
+   let min = Infinity
+   if (num1<min){
+      min = num1
+   }
+   if (num2<min){
+      min = num2
+   }
+   if (num3<min){
+      min = num3
+   }
+   if (num4<min){
+      min = num4
+   }
+   return min
+}
+document.write(`Мінімальне значення серез чотирьох чисел = ${minNumAmongForthNum(5,10,11,2)}`)
+</script>
+<script>
+// Задача 4. Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних, кількість додатних, кількість більших за 100.
+function numbersEvenPositiveMore100(num1,num2,num3) {
+            let evenCount = 0  
+            let positiveCount = 0
+            let greaterThan100Count = 0
+            
+            if (num1 %2 === 0){
+            evenCount++
+            }
+            if (num2 %2 === 0){
+            evenCount++
+            }
+            if (num3 %2 === 0){
+            evenCount++
+            }
+
+            if (num1 > 0){
+               positiveCount++
+            }
+            if (num2 > 0){
+               positiveCount++
+            }
+            if (num3 > 0){
+               positiveCount++
+            }
+            
+            if(num1>100){
+               greaterThan100Count++
+            }
+            if(num2>100){
+               greaterThan100Count++
+            }
+            if(num3>100){
+               greaterThan100Count++
+            }
+               return [evenCount,positiveCount,greaterThan100Count]
+            
+         }
+
+         let results = numbersEvenPositiveMore100(23,87,999)
+         document.write(`Кількість парних = ${results[0]}<br>`)
+         document.write(`Кількість додатних = ${results[1]}<br>`)
+         document.write(`Кількість більших за 100 = ${results[2]}<br>`)
+      </script>
+</body>
+</html>
+
