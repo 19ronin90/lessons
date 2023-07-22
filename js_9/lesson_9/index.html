@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+// Задача№1 Користувач вводить кількість елементів. Створити масив,
+//що складається з вказаної кількості елементів заповнених нулями.
+
+const arrLength = parseInt(prompt('Введіть довжину масиву', 12))
+		const arrZero = new Array(arrLength).fill(0);
+
+		//Виводжу результат на сторінку
+		document.write(`<div class="solution">
+			Результат виконання:<br><br>
+			${arrZero}
+			</div>`);
+//Задача№2 Користувач вводить кількість елементів.
+//Створити масив, у якому перша половина заповнена 1-цями, а друга заповнена
+
+const arrayLength = parseInt(prompt('Введіть довжину масиву )', 8))
+			const arr = new Array(arrayLength)
+			const arrMiddle = Math.ceil(arr.length / 2);
+			const numForFill1 = 1;
+			const numForFill2 = 7;
+			arr.fill(numForFill1, 0, arrMiddle).fill(numForFill2, arrMiddle);
+			
+			document.write(`<div class="solution">
+				Результат виконання:<br><br>
+				${arr}
+				</div>`);
+
+//Задача№10Дано масив цін у грн. Податок складає 20%.
+//	Сформувати масив, який буде містити величину сплаченого податку у грн.
+	function randomFillFunc(min, max, lengthArr) { 
+			let arr = [];
+			for (let i = 0; i < lengthArr; i++) {
+				let rand = Math.floor(min+(Math.random()*(max-min+1)))
+				arr.push(rand);
+			}
+			return arr;
+		}
+
+		const pricesArr = randomFillFunc(240, 341, 21);
+
+		function taxes (someArr) {
+			let resArr = [];
+			someArr.forEach((el) => {
+				resArr.push(Math.round((el*0.2)*100)/100);
+			});
+			return resArr;
+		}
+		
+		document.write(`<div class="solution">
+				Результат виконання6 <br><br>
+				Ціна: ${pricesArr.join(' грн, ')} грн.<br>
+				Податок: ${taxes(pricesArr).join(' грн, ')} грн.
+			</div>`);
+
+//Задача№9Дано масив імен. Сформувати масив з перших літер цих імен.
+
+const namesArr = ['Антон', 'Влад', 'Толя', 'Олег',];
+			function firstLetter (someArr) {
+				let res = [];
+				someArr.forEach ((elem, index, arr) => {
+					res.push(elem[0]);
+				})
+				return res;
+			}
+			
+			document.write(`<div class="solution">
+				Результат виконання6 <br><br>
+				${firstLetter(namesArr).join('')}
+			</div>`);
+//Задача№8Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»
+const numbersArr = ['АХ2231АЕ', 'АХ7147МН', 'ВІ7037', 'АХ8178МН', 'АІ1234НО', 'СА3465МА'];
+
+function numberOfCar (someArr) {
+	let res = [];
+	someArr.forEach ((elem) => {
+		if (elem[0] === 'А') res.push(elem);
+	})
+	return res;
+}
+
+document.write(`<div class="solution"><br><br>
+	Результат: <br><br>
+	Всі номери: ${numbersArr.join(', ')}<br>
+	Всі, які починаються на "А": ${numberOfCar(numbersArr).join(', ')}
+</div>`);
+
+
+document.write(`<div class="solution">
+	
+</div>`);
+
+
+</script>
+</body>
+</html>
+
+
