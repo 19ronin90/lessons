@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+	  // Знайти суми елементів у вказаній області (масиви розділені на 4 рівні частини -  не звертаємо увагу на криві малюнки ☺ )
+
+      function getArrayWithRandomValue(length, minValue, MaxValue) {
+        let arr = [];
+        for (let i = 0; i < length; i++) {
+          let element =
+            minValue + Math.floor(Math.random() * (MaxValue - minValue + 1));
+          arr.push(element);
+        }
+        return arr;
+      }
+
+      function getTable(length, minValue, maxValue) {
+        let table = [];
+        for (let i = 0; i < length; i++) {
+          let element = getArrayWithRandomValue(length, minValue, maxValue);
+          table.push(element);
+        }
+
+        return table;
+      }
+
+      function printTable(table) {
+        document.write("<table>");
+        for (let rowNumber = 0; rowNumber < table.length; rowNumber++) {
+          document.write("<tr>");
+          for (
+            let columnNumber = 0;
+            columnNumber < table.length;
+            columnNumber++
+          ) {
+            document.write(`<td>${table[rowNumber][columnNumber]}</td>`);
+          }
+          document.write("</tr>");
+        }
+        document.write("</table>");
+      }
+
+      function getSumTableQuarters(table, quarterNumber) {
+        let startRowsValue, endRowsValue, startColumnValue, endColumnValue;
+        let sum = 0;
+
+        switch (quarterNumber) {
+          case 1:
+            startRowsValue = 0;
+            endRowsValue = Math.floor(table.length / 2);
+            startColumnValue = Math.floor(table.length / 2);
+            endColumnValue = table.length;
+            break;
+          case 2:
+            startRowsValue = 0;
+            endRowsValue = Math.floor(table.length / 2);
+            startColumnValue = 0;
+            endColumnValue = Math.floor(table.length / 2);
+            break;
+          case 3:
+            startRowsValue = Math.floor(table.length / 2);
+            endRowsValue = table.length;
+            startColumnValue = 0;
+            endColumnValue = Math.floor(table.length / 2);
+            break;
+          case 4:
+            startRowsValue = Math.floor(table.length / 2);
+            endRowsValue = table.length;
+            startColumnValue = Math.floor(table.length / 2);
+            endColumnValue = table.length;
+            break;
+        }
+
+        for (
+          let rowsNumber = startRowsValue;
+          rowsNumber < endRowsValue;
+          rowsNumber++
+        ) {
+          for (
+            let columnNumber = startColumnValue;
+            columnNumber < endColumnValue;
+            columnNumber++
+          ) {
+            sum += table[rowsNumber][columnNumber];
+          }
+        }
+
+        return sum;
+      }
+
+      function getSumEvenRows(table) {
+        let sum = 0;
+        for (let rowsNumber = 0; rowsNumber < table.length; rowsNumber += 2) {
+          for (
+            let columnNumber = 0;
+            columnNumber < table.length;
+            columnNumber++
+          ) {
+            sum += table[rowsNumber][columnNumber];
+          }
+        }
+
+        return sum;
+      }
+
+      function getSumOddColumns(table) {
+        let sum = 0;
+        for (let rowsNumber = 0; rowsNumber < table.length; rowsNumber++) {
+          for (
+            let columnNumber = 1;
+            columnNumber < table.length;
+            columnNumber += 2
+          ) {
+            sum += table[rowsNumber][columnNumber];
+          }
+        }
+
+        return sum;
+      }
+
+      function getSumEvenRowsOddColumnsAndViceVersa(table) {
+        let sum1 = 0;
+        let sum2 = 0;
+        for (let rowsNumber = 0; rowsNumber < table.length; rowsNumber++) {
+          for (
+            let columnNumber = 0;
+            columnNumber < table.length;
+            columnNumber++
+          ) {
+            if (rowsNumber % 2 === 0 && columnNumber % 2 !== 0) {
+              sum1 += table[rowsNumber][columnNumber];
+            } else {
+              sum2 += table[rowsNumber][columnNumber];
+            }
+          }
+        }
+
+        return [sum1, sum2];
+      }
+
+      let userLength = parseInt(
+        prompt("Введіть розмір багатовимірного масиву", "4")
+      );
+      if (isFinite(userLength)) {
+        if (userLength > 1) {
+          const minValue = 1;
+          const maxValue = 10;
+          let table = getTable(userLength, minValue, maxValue);
+          printTable(table);
+
+          let sumFirstQuarter = getSumTableQuarters(table, 1);
+          document.write(`1) Перша чверть: Sum = ${sumFirstQuarter}<br>`);
+
+          let sumSecondQuarter = getSumTableQuarters(table, 2);
+          document.write(`2) Друга чверть: Sum = ${sumSecondQuarter}<br>`);
+
+          let sumThirdQuarter = getSumTableQuarters(table, 3);
+          document.write(`3) Третя чверть: Sum = ${sumThirdQuarter}<br>`);
+
+          let sumFourthQuarter = getSumTableQuarters(table, 4);
+          document.write(`4) Четверта чверть: Sum = ${sumFourthQuarter}<br>`);
+
+          let sumEvenRows = getSumEvenRows(table);
+          document.write(`5) Сума парни рядків: Sum = ${sumEvenRows}<br>`);
+
+          let sumOddColumns = getSumOddColumns(table);
+          document.write(
+            `6) Сума непарних стовпців: Sum = ${sumOddColumns}<br>`
+          );
+
+          let sumEvenRowsOddColumnsAndViceVersa =
+            getSumEvenRowsOddColumnsAndViceVersa(table);
+          document.write(
+            `7) У парних рядках – непарні стовпці: Sum = ${sumEvenRowsOddColumnsAndViceVersa[0]}<br> У непарних – парні: Sum = ${sumEvenRowsOddColumnsAndViceVersa[1]}`
+          );
+        } else {
+          throw new Error(
+            "Помилка! Розмір багатовимірного масиву має бути більше 1"
+          );
+        }
+      } else {
+        throw new Error("Помилка! Введіть числове значення!");
+      }
+
+// Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.
+
+function generateField(rowsNumber, columnNumber) {
+        let field = [];
+        for (let rowsCount = 0; rowsCount < rowsNumber; rowsCount++)
+          field.push(new Array(columnNumber).fill(0));
+
+        return field;
+      }
+
+      function generateRandomShipsPosition(
+        shipsCount,
+        field,
+        rowsNumber,
+        columnNumber
+      ) {
+        for (let shipNumber = 0; shipNumber < shipsCount; ) {
+          let randomRowPosition = Math.floor(Math.random() * rowsNumber);
+          let randomColumnPosition = Math.floor(Math.random() * columnNumber);
+
+          if (field[randomRowPosition][randomColumnPosition] !== 1) {
+            shipNumber++;
+            field[randomRowPosition][randomColumnPosition] = 1;
+          }
+        }
+
+        return field;
+      }
+
+      function gameActions(userShellsCount, shipsCount, field) {
+        do {
+          console.log(field.flat(Infinity));
+          let userRowNumber =
+            parseInt(prompt("Введіть номер рядка [1-6]", "1")) - 1;
+          let userColumnNumber =
+            parseInt(prompt("Введіть номер колонки [1-6]", "1")) - 1;
+
+          if (field[userRowNumber][userColumnNumber] === 1) {
+            field[userRowNumber][userColumnNumber] = 0;
+            shipsCount--;
+            userShells--;
+            alert(
+              `Ви потопили корабель!\nКораблів: ${shipsCount}\nСнарядів: ${userShells}`
+            );
+          } else {
+            userShells--;
+
+            if (userShells < shipsCount) {
+              alert(
+                `Кількість снарядів (${userShells}) менша за кількість кораблів (${shipsCount})!\nВи програли!`
+              );
+              break;
+            }
+            alert(`Промах! У вас залишилось кількість снарядів: ${userShells}`);
+          }
+        } while (shipsCount > 0 && userShells > 0);
+
+        if (shipsCount === 0) {
+          alert("Вітаю! Ви збили всі кораблі!");
+        }
+
+        if (userShells === 0) {
+          alert("У вас не залишилось снарядів! Ви програли!");
+        }
+      }
+
+      let userShells = parseInt(prompt("Введіть кількість снарядів", "6"));
+      if (isFinite(userShells)) {
+        if (userShells > 0) {
+          const rowsNumber = 6;
+          const columnsNumber = 6;
+          let initialPlayingField = generateField(rowsNumber, columnsNumber);
+          let shipsNumber;
+
+          do {
+            shipsNumber = parseInt(prompt("Введіть кількість кораблів", "5"));
+            userShells < shipsNumber
+              ? alert(
+                  `Кількість кораблів має бути менше чи дорівнювати кількості снарядів!`
+                )
+              : "";
+          } while (userShells < shipsNumber);
+
+          if (isFinite(shipsNumber)) {
+            if (shipsNumber > 0) {
+              if (shipsNumber <= rowsNumber * columnsNumber) {
+                let playingField = generateRandomShipsPosition(
+                  shipsNumber,
+                  initialPlayingField,
+                  rowsNumber,
+                  columnsNumber
+                );
+
+                gameActions(userShells, shipsNumber, playingField);
+              } else {
+                throw new Error(
+                  "Помилка! Кількість кораблів має бути менше кількості клітинок на полі!"
+                );
+              }
+            } else {
+              throw new Error("Помилка! Значення має бути більше 0");
+            }
+          } else {
+            throw new Error("Помилка! Введіть числове значення!");
+          }
+        } else {
+          throw new Error("Помилка! Значення має бути більше 0");
+        }
+      } else {
+        throw new Error("Помилка! Введіть числове значення!");
+      }
+
+//Задача№2 Дано інформацію про прибуток К магазинів протягом тижня. Знайти :
+//загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за
+//вівторок, і т.д.);
+//сформувати загальний список (одновимірний масив) зі значенням, які більші за 500
+//відсортувати кожен тиждень за зростанням
+//  відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при
+//  порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків
+// упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків
+// треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з
+//  елементів повинен іти раніше).</li>
+//Результат рішення
+    function outputArr(arrForOutput) {
+      for (let i = 0; i < arrForOutput.length; i++) {
+        document.write(`<span>${arrForOutput[i]}</span><br>`)
+      }
+    }
+    function sumWeek(days) {
+      let arrSumWeek = []
+      for (let i = 0; i < days; i++) {
+        let randNum = Math.floor(Math.random() * 1000)
+        arrSumWeek.push(randNum)
+      }
+      return arrSumWeek
+    }
+
+    function getArrSumShops(shops, sumDays) {
+      let arrSumShopsWeek = []
+      for (let i = 0; i < shops; i++) {
+        let cashShopWeek = sumWeek(sumDays)
+        arrSumShopsWeek.push(cashShopWeek)
+      }
+      return arrSumShopsWeek
+    }
+
+    let numShops = parseInt(prompt('Введіть кількість магазинів для формування масиву прибутків.'))
+
+    let arrCashShopsWeek = getArrSumShops(numShops, 7)
+
+    // функція підрахунку суми прибутку по днях
+    function getSumProfitByDays(arrCash, shops) {
+      let profitByDays = []
+      let sumByDay = 0
+      for (let j = 0; j < arrCash[0].length; j++) {
+        for (let i = 0; i < shops; i++) {
+          sumByDay += arrCash[i][j]
+        }
+        profitByDays.push(sumByDay)
+        sumByDay = 0
+      }
+      return profitByDays
+    }
+
+    // функція генерування масиву з сумами більшими за 500
+    function getArrMoreHundred(arrCash) {
+      let arrSingleLevel = arrCash.flat()
+      let arrProfitMoreHundred = arrSingleLevel.filter(
+        element => element > 500
+      )
+      return arrProfitMoreHundred
+    }
+
+    // Функція сортування потижневого прибутку за зростанням
+    function getSortInWeek(arrCash) {
+      let newArrForSort = JSON.parse(JSON.stringify(arrCash))
+      for (let i = 0; i < arrCash.length; i++) {
+        newArrForSort[i].sort((a, b) => a - b)
+      }
+      return newArrForSort
+    }
+
+    // Сортування масиву за спаданням максимального  значення в тижні, та по загальним сумам 
+
+
+    function arrSumElementWeek(arrCash) {
+      let newArrForSort = []
+      for (let i = 0; i < arrCash.length; i++) {
+        let sumElInWeek = arrCash[i].reduce((sumEl, element) => sumEl + element,
+          0)
+        newArrForSort.push(sumElInWeek)
+      }
+      return newArrForSort
+    }
+
+
+    function arrMaxEl(arrCash) {
+      let newArrForSort = []
+      for (let i = 0; i < arrCash.length; i++) {
+        let maxElInWeek = arrCash[i].reduce((maxEl, element) => element > maxEl ? maxEl = element : maxEl,
+          0)
+        newArrForSort.push(maxElInWeek)
+      }
+      return newArrForSort
+    }
+
+
+    function getSortMaxToMin(arrCash, func) {
+      let arrForSort = JSON.parse(JSON.stringify(arrCash))
+      let newArrForSort = func(arrForSort)
+
+      const valueForSort = newArrForSort.length - 2
+
+      for (let i = 0; i <= valueForSort; i++) {
+        let maxElIndex = i
+        for (let j = i + 1; j < newArrForSort.length; j++) {
+          if (newArrForSort[j] > newArrForSort[maxElIndex]) maxElIndex = j
+
+          if (maxElIndex !== i) {
+            let temp = newArrForSort[i]
+            newArrForSort[i] = newArrForSort[maxElIndex]
+            newArrForSort[maxElIndex] = temp
+
+            let tempRow = arrForSort[i]
+            arrForSort[i] = arrForSort[maxElIndex]
+            arrForSort[maxElIndex] = tempRow
+          }
+
+        }
+
+      }
+      return arrForSort
+    }
+
+    let arrSortBySumWeekMinMax = getSortInWeek(arrCashShopsWeek)
+
+    let arrSortByMaxEl = getSortMaxToMin(arrCashShopsWeek, arrMaxEl)
+
+    let arrSortBySumRow = getSortMaxToMin(arrCashShopsWeek, arrSumElementWeek)
+
+    document.write(`
+    Сума прибутку по днях тижня: ${getSumProfitByDays(arrCashShopsWeek, numShops)}<br> 
+    
+    Масив що містить лише суми більші за 500: ${getArrMoreHundred(arrCashShopsWeek)} <br> 
+    
+    Масиви з відсортованими данними: <br>
+    
+    Тиждень за зростанням:<br>`)
+    outputArr(arrSortBySumWeekMinMax)
+    document.write(` За спаданням максимального елемента в тижні:<br>`)
+    outputArr(arrSortByMaxEl)
+    document.write(`За спаданням суми елементів у рядку:<br>`)
+    outputArr(arrSortBySumRow)
+
+
+
+</script>
+</body>
+</html>
+
+
