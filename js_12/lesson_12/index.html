@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+	 // Задача 1. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування бульбашкою
+function getRandNum(minNum = 1, maxNum = 100) {
+	return  minNum + Math.floor(Math.random()*(maxNum - minNum + 1))
+  }
+	function getRandArr(arrNumbers = 20) { 
+		let randArr = []
+		for (let i = 0; i < arrNumbers; i++) {
+	  const randNum = getRandNum()
+			randArr.push(randNum)
+		}
+		return randArr
+	 }
+	 console.log(`${ getRandArr()}`);
+	 const randArr =  getRandArr();
+	 function getQuantityChanged (randArr) {
+		let counter = 0;
+		let changed ;
+		// let prevLastIndex = randArr.length - 2
+	 do {
+		changed = false ;
+	 
+		for (let i = 1; i < randArr.length; i++) {
+		if(randArr[i - 1] > randArr[i]) {
+			let temp = randArr[i - 1];
+			randArr[i - 1] = randArr[i]
+			randArr[i] = temp;
+			changed = true;
+			counter++
+		}
+		}
+	}
+	while(changed)
+		console.log(randArr);
+		return counter
+	   } 
+	 console.log(`${getQuantityChanged(randArr)}`);
+
+   // Задача 2. 	Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням.
+function getRandomNum(minNum = 1, maxNum = 1000) {
+	return minNum + Math.floor(Math.random()*(maxNum - minNum + 1))
+  }
+	function getArrRandom(arrNumbers = 30){
+		let arrRandom = []
+		for (let i = 0; i < arrNumbers; i++) {
+		const randNum = getRandomNum()
+			arrRandom.push(randNum);
+		}
+		return arrRandom
+	}
+	console.log(`${getArrRandom()}`);
+	const arrRandom = getArrRandom();
+	function swap(arr, i, j) {
+		let temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	  }
+	function getQuantitySortShake(arrRandom) { 
+		let leftIndex = 0;
+		let rightIndex = arrRandom.length - 1;
+		let counter = 0;
+		while(leftIndex < rightIndex){
+			for (let ind = leftIndex; ind < rightIndex; ind++) {
+				if(arrRandom[ind] > arrRandom[ind + 1] ){
+				swap(arrRandom, ind, ind + 1)
+				counter++
+				}
+			}
+			rightIndex--
+			for (let ind = rightIndex; ind > leftIndex; ind--) {
+				if(arrRandom[ind] < arrRandom[ind - 1]){
+					swap(arrRandom, ind, ind - 1)
+					counter++
+				}
+			}
+			leftIndex++
+
+		}
+		return counter
+	 }
+	 console.log(`${getQuantitySortShake(arrRandom)}`);
+	 console.log(arrRandom);
+
+   // Задача 3.Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.
+function getRandomNum(minNum = 1, maxNum = 100) {
+	return minNum + Math.floor(Math.random()*(maxNum - minNum + 1))
+  }
+	function getArrRandom(arrNumbers = 30){
+		let arrRandom = []
+		for (let i = 0; i < arrNumbers; i++) {
+		const randNum = getRandomNum()
+			arrRandom.push(randNum);
+		}
+		return arrRandom
+	}
+	console.log(`${getArrRandom()}`);
+
+  // Задача 4.Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком.
+// 		Тобто кожного разу після обміну елементів вивести поточний стан масиву на екран.
+document.write('Сортування бульбашкой :'+'<br>');
+let a = [8, 2, 6, 4, 15, 11]
+let changed
+do{
+	changed = false;
+	for (let i = 1; i < a.length; i++) {
+		if(a[i - 1] > a[i]){
+			let temp = a[i - 1]
+			a[i -1] = a[i]
+			a[i] = temp
+	    changed = true
+			document.write(`Перестановка :${a}`+'<br>');
+		}
+	}
+}
+while(changed);
+document.write('Змішане сортування:'+'<br>')
+let arr = [10, 14, 56, 36, 15, 21, 11,]
+let leftIndex = 0;
+let rightIndex = arr.length - 1
+function swap(arr, i, j) { 
+	let temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp
+ }
+while(leftIndex < rightIndex){
+for (let ind = leftIndex; ind < rightIndex; ind++) {
+if(arr[ind] > arr[ind + 1])	{swap(arr, ind, ind + 1)}
+document.write(`Прямий рух :${arr} <br>`);
+
+}
+rightIndex--
+for (let ind = rightIndex; ind > leftIndex; ind--) {
+	if(arr[ind] < arr[ind - 1])	{swap(arr, ind, ind - 1)}
+	document.write(`Зворотній рух ${arr} <br>`);
+	}
+	leftIndex++
+}
+
+document.write('Сортування включенням :'+'<br>');
+let userArr = [14, 2, 51, 77, 21, 4, 36, 11]
+function getIncludeSortArr(array) {
+	let i;
+	for (let k = 1; k < array.length; k++) {
+		let currentElement = array[k]
+		i = k - 1;
+		while(i >= 0 && array[i] >  currentElement){
+			array[i + 1] = array[i]
+			i = i - 1
+		}
+		array[i + 1] = currentElement;
+		document.write(`Вставка ${array} <br>`);
+	}
+	return array
+  }
+document.write(`${getIncludeSortArr(userArr)}<br>`)
+document.write('Сортування вибором :'+'<br>');
+let arrSelect = [-9, 21, 10, -2, 35]
+let prevLastIndex2 = arrSelect.length - 2;
+for (let i = 0; i <= prevLastIndex2; i++) {
+for (let j = i +1; j < arrSelect.length; j++) {
+	if(arrSelect[i] > arrSelect[j]){
+		let temp = arrSelect[i]
+		arrSelect[i] = arrSelect[j]
+		arrSelect[j] = temp
+	}
+	document.write(`Перестановка ${arrSelect} <br>`);
+}	
+}
+document.write('Сортування вибором c находженням минимального:'+'<br>');
+let arrSelect2 = [7, 12, -11, 55, -9, 21, 10, -2, 35]
+let prevLastIndex3 = arrSelect2.length - 2;
+for (let i = 0; i <= prevLastIndex3; i++) {
+	let minIndex = i
+for (let j = i +1; j < arrSelect2.length; j++) {
+	if(arrSelect2[j] < arrSelect2[minIndex]){
+	 minIndex = j
+	}
+}
+	if (i !== minIndex){
+		let temp = arrSelect2[i]
+		arrSelect2[i] = arrSelect2[minIndex]
+		arrSelect2[minIndex] = temp
+	document.write(`Перестановка * ${arrSelect2} <br>`);
+}	
+}
+document.write('Швидке сортування :'+'<br>');
+let speedArr = [45, -23, 12, 78, -4, 77, 36, 98, -78, 24, 7, 39]
+function swap2(arr, i, j) {
+	let temp = arr[i]
+	arr[i] = arr[j]
+	arr[j]= temp
+  }
+function partition(arr, p, q) { 
+	let pivot = arr[q]
+	let i = p - 1
+	for (let j = p; j < q; j++) {
+		if(arr[j] <= pivot){
+			i = i +1 ;
+			swap2(arr, i, j)
+			document.write(`Перестановка зліва від pivot:${arr}`+'<br>');
+		}
+	}
+	swap2(arr, i + 1, q)
+	document.write(`Перестановка  pivot:${arr}`+'<br>');
+	return i + 1
+ }
+ function quickSort(arr, p, q) {
+	if(p >= q) return
+	let i = partition(arr, p, q)
+	quickSort(arr, p, i - 1)
+	quickSort(arr, i + 1, q)
+   }
+	 quickSort(speedArr, 0, speedArr.length - 1)
+	 document.write(speedArr)
+
+
+   // Задача 5. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+let namesArr = ['Sergy', 'Olena', 'Nikola', 'Stas', 'Ganna', 'Olga', 'Petro', 'Dmitro']
+let modifyNamesArr = namesArr.sort()
+document.write(`Отсортований масив: ${modifyNamesArr}<br>`)
+let searchElement = 'Olga' ;
+function includeIndexElem(arr, searchElement) {
+    let startIndex = 0;
+    let endIndex = arr.length - 1
+    while (startIndex <= endIndex) {
+        const middleIndex = Math.floor((endIndex + startIndex) / 2);
+        if (arr[middleIndex] === searchElement) return middleIndex;
+        if (arr[middleIndex] < searchElement) startIndex = middleIndex + 1
+        if (arr[middleIndex] > searchElement) endIndex = middleIndex - 1
+    }
+    return -1;
+}
+const searchIndexElem = includeIndexElem(modifyNamesArr, searchElement);
+if (searchIndexElem !== -1) document.write(`В масиві є ім'я ${searchElement} під номером ${searchIndexElem}`)
+else document.write('В масиві нема такого імені')
+
+
+
+</script>
+</body>
+</html>
+
+
