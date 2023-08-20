@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+	   //Задача 0. Реалізувати рекурсивну функцію знаходження степеня числа а
+      //Оголошуємо змінні
+      let number = 7, 
+          degree = 6
+
+      //Рекурсивна функція знаходження степеня числа а
+
+      function getNumberDegree(number, degree) {
+         if (degree === 0) return 1
+         return getNumberDegree(number, degree - 1) * number
+      }
+      let numberDegree = getNumberDegree(number, degree)
+      document.write(`Число ${number} в степені ${degree} дорівнює ${numberDegree}`)
+
+	  //Задача-1Нехай X0=1, Xi = Xi - 1 + 2i, де i = 1,2,... . Визначити X10. Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів
+
+      //Оголошуємо змінні
+
+      let i = 10
+
+      //Розвʼязок за допомогою рекурсивної функції
+
+      function getX(i) {  
+         if (i === 0) return 1
+         return getX(i - 1) + 2 * i
+      }
+      let x = getX(i)
+      document.write(`Значення X рекурсивним розвʼязком = ${x}<br>`)
+
+   //Розвʼязок за допомогою не рекурсивної функції
+
+   function getXValue(i) {
+      let result = 1
+      if (i === 0) return result 
+      for (let k = 1; k <= i; k++) {
+         result += 2 * k
+      }
+   return result
+   }
+   let xValue = getXValue(i)
+      document.write(`Значення X звичайним розвʼязком = ${xValue}`)
+
+	  // Задача 2. Реалізувати бінарний пошук (розглядали на попередніх уроках) з використанням рекурсивного алгоритму.
+
+            //Оголошуємо змінні
+			const arrayToSearch = [34, 232, 2, 22, 3, 23, 5, 10, 15, 26, 55],
+         searchElement = 23
+
+            // Сортуємо масив 
+         arrayToSearch.sort(
+            (el1, el2) => el1 - el2
+         ) 
+         document.write(`Початковий масив: ${arrayToSearch}<br>`)
+
+            // Функція бінарного пошуку з використанням рекурсії
+         function binarySearch(array, searchElement, start , end) {   
+            let middleOfArray = Math.floor((start + end) / 2)
+            if (start <= end){
+               if (array[middleOfArray] === searchElement) return middleOfArray
+               if (array[middleOfArray] < searchElement) return binarySearch(array, searchElement, middleOfArray + 1 , end)
+               if (array[middleOfArray] > searchElement) return binarySearch(array, searchElement, start , middleOfArray - 1)
+            }
+            return -1
+         }
+
+            //Виводимо результат
+         let result = binarySearch(arrayToSearch, searchElement, 0 , arrayToSearch.length - 1)
+         if (result === -1)
+         document.write('Такого числа в даному масиві не знайдено')
+         else document.write(`Введене число знаходиться у позиції ${result}`)
+
+
+		  //Задача 3.  З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами видавати по одне значення від заданого мінімального до заданого максимального. Якщо значення досягне максимального, то наступним буде мінімальне значення. З використанням цієї функції реалізувати перебір номерів місяців. 
+
+         //Оголошуємо змінні
+
+         const minValue = 1,
+         maxValue = 6
+
+            //Ітератор 
+         function getIteratorWithStep1(minValue = 1, maxValue = 12) {
+         let result = minValue
+         function getNextValue() {
+            if(result === maxValue) 
+               result = minValue
+               else  ++result
+            return result
+         }
+         return getNextValue
+         }
+
+         let monthIterator = getIteratorWithStep1()
+         
+            //Функція перебору місяців в залежності від введених даних
+
+         function getMonthsOvercoming(monthsNumber, monthIterator) {
+
+         for (let i = 0; i <= 20; i++) {
+
+            document.write(`${monthIterator()} <br>`)
+         }
+         }
+
+         getMonthsOvercoming(20, monthIterator)
+
+		 //Задача 4. З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами видавати по одну букву наперед заданого слова. З використанням нього розробити гру «Прекладач». Виводимо для користувача опис цього слова і по одну букву користувач вводить переклад цього слова. Підрахувати кількість вгаданих букв.
+
+		 function getLettersInWord(word) {
+         let wordLetter,
+            counter = 0
+
+         function getLetter() {
+            if (counter === word.length) counter = 0
+
+               wordLetter = word[counter]
+               counter++
+
+            return wordLetter
+         }
+         return getLetter
+      }
+
+      function translator(word, description) {
+         let taskInfo = alert(
+            `Перекладіть англійською мовою: ${description} (${word.length} букв)`
+         )
+         let wordInLetters = getLettersInWord(word)
+         let counter = 0
+         let userLettersArr = []
+         for (let letter = 0; letter < word.length; letter++) {
+            const userLetter = prompt(
+               `Введіть ${letter + 1} букву перекладу`
+            ).toLowerCase()
+            const wrightLetter = wordInLetters()
+
+            userLettersArr.push(userLetter)
+            if (wrightLetter === userLetter) counter++
+         }
+         return [userLettersArr, counter]
+      }
+
+      let word = 'spring'
+
+      let description =
+         'Oдна з чотирьох пір року між зимою та літом, характерна для помірних широт '
+      let [userLettersArr, counter] = translator(word, description)
+      document.write(
+         `Переклад слова: ${word}. <br> Ви ввели букви: ${userLettersArr}.
+       Кількість правильно вгаданих букв: ${counter}`
+      )
+   
+
+	  
+
+</script>
+</body>
+</html>
+
+
