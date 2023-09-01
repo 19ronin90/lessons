@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+	// Задача 0. Дано два об’єкта. Обидва містять масив цілих чисел.
+      // При цьому у одному з них є функція знаходження суми,
+      // а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+      // Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+
+      let obj1 = {
+        numbers: [50, 35, 1, 80, 10, 30, 50],
+        getSum: function () {
+          return this.numbers.reduce((prevSum, element) => prevSum + element);
+        },
+      };
+
+      let obj2 = {
+        numbers: [20, 10, 40, 80, 5, 15],
+        getProduct: function (min, max) {
+          return this.numbers.reduce(
+            (prevProd, element) =>
+              element >= min && element <= max ? prevProd * element : prevProd,
+            1
+          );
+        },
+      };
+
+      let sumObj1 = obj1.getSum();
+      let sumObj2 = obj1.getSum.call(obj2);
+      // let sumObj2 = obj1.getSum.apply(obj2);
+
+      document.write(`s1 = ${sumObj1}<br>`);
+      document.write(`s2 = ${sumObj2}<br>`);
+
+      let prodObj1 = obj2.getProduct.call(obj1, 10, 30);
+      // let prodObj1 = obj2.getProduct.apply(obj1, [10, 30]);
+      let prodObj2 = obj2.getProduct(10, 30);
+      document.write(`prod1 = ${prodObj1}<br>`);
+      document.write(`prod2 = ${prodObj2}<br>`);
+
+        // Задача 2. Створити об’єкт «Авто». 
+
+      // Поля(властивості)
+      // Марка
+      // Розмір бака
+      // Кількість наявних літрів
+      // Кількість місць
+      // Кількість пасажирів
+
+      // Методи (дії)
+      // Заправка на вказану кількість літрів
+      // Виведення кількості пасажирів
+      // Додавання пасажирів
+      // Висадка пасажирів
+
+      function Car(initMark, initTankSize, initCurrentLiters, initPlaceNumbers, initPassengersNumbers) {
+        this.initMark = initMark;
+        this.initTankSize = initTankSize;
+        this.initCurrentLiters = initCurrentLiters;
+        this.initPlaceNumbers = initPlaceNumbers;
+        this.initPassengersNumbers = initPassengersNumbers;
+      }
+
+      Car.prototype.refuel = function(litersNumber) {
+        if (this.initCurrentLiters + litersNumber > this.initTankSize) {
+          throw new Error(`Не достатьно місця в баці`)
+        } else {
+          this.initCurrentLiters += litersNumber;
+        }
+        
+        return this.initCurrentLiters;
+      }
+
+      Car.prototype.printPassengersNumbers = function() {
+        alert(`В автомобілі "${this.initMark}" кількість пасажирів ${this.initPassengersNumbers}`);
+      }
+
+      Car.prototype.addPassengers = function(passengersNumber) {
+        let availablePlaceNumbers = this.initPlaceNumbers - this.initPassengersNumbers;
+        if (passengersNumber > availablePlaceNumbers) {
+          throw new Error(`В автомобілі "${this.initMark}" не достатьо місць`);
+        } else {
+          this.initPassengersNumbers += passengersNumber;
+        }
+
+        return this.initPassengersNumbers;
+      }
+
+      Car.prototype.disembarkingPassengers = function (passengersNumber) {
+        if (passengersNumber > this.initPassengersNumbers) {
+          throw new Error(`Такої кількості пасажирів немає в автомобілі "${this.initMark}"`);
+        } else this.initPassengersNumbers -= passengersNumber;
+
+        return this.initPassengersNumbers;
+      }
+
+      let car = new Car('Volvo', 100, 20, 6, 2);
+      console.log(car);
+      let userLitersNumber = parseFloat(prompt(`Введіть кількість палива`));
+      car.refuel(userLitersNumber);
+      let userAddPassengers = parseInt(prompt('Введіть кількість пасажирів'));
+      car.addPassengers(userAddPassengers);
+      let userRemovePassengers = parseInt(prompt('Введіть кількість пасажирів для висадки'));
+      car.disembarkingPassengers(userRemovePassengers);
+      console.log(car);
+
+
+      // Задача 3. Розробити клас MultChecker для перевірки таблиці множення
+
+      // Поля
+      // Число, яке перевіряємо (наприклад, перевірка частини таблиці множення на 7)
+      // Кількість правильних відповідей
+      // Кількість неправильних відповідей
+
+      // Методи
+      // Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване)
+      // Перевірка правильності вказаної відповіді
+      // render
+
+      class MultChecker {
+        constructor(initFirstNumber) {
+          this.number = initFirstNumber;
+          this.correctAnswers = 0;
+          this.incorrectAnswers = 0;
+        }
+        generateExample() {
+          let secondNumber = 1 + Math.floor(Math.random() * 10);
+          return secondNumber;
+        }
+        checkAswer() {
+          let secondNum = this.generateExample();
+          let userAnswer = parseInt(
+            prompt(`Обчисліть приклад: ${this.number} * ${secondNum}`)
+          );
+          let answer = this.number * secondNum;
+          if (userAnswer === answer) {
+            this.correctAnswers++;
+          } else {
+            this.incorrectAnswers++;
+          }
+        }
+        render() {
+          alert(
+            `Кількість правильних відповідей: ${this.correctAnswers}\nКількість неправильних відповідей: ${this.incorrectAnswers}`
+          );
+        }
+      }
+
+      let multTrainer = new MultChecker(5);
+      for (let i = 0; i < 5; i++) {
+        multTrainer.checkAswer();
+      }
+      multTrainer.render();
+
+       // Задача 5. Розробити клас «Керівник танців»
+
+      // Поля
+      // Масив імен хлопців
+      // Масив імен дівчат
+
+      // Методи
+      // Метод випадкового вибору імені хлопця
+      // Метод випадкового вибору імені дівчини
+      // Метод виведення пари для танців
+      // Метод run , який ініціює через кожні 5 секунд виведення нової пари для танців
+
+      class DanceDirector {
+        constructor(initBoys, initGirls) {
+          this.boys = initBoys;
+          this.girls = initGirls;
+        }
+        getRandomBoy() {
+          const min = 0;
+          const max = this.boys.length - 1;
+          let randIndex = min + Math.floor(Math.random() * (max - min + 1));
+          return this.boys[randIndex];
+        }
+        getRandomGirl() {
+          const min = 0;
+          const max = this.girls.length - 1;
+          let randIndex = min + Math.floor(Math.random() * (max - min + 1));
+          return this.girls[randIndex];
+        }
+        getCouple() {
+          let currentBoy = this.getRandomBoy();
+          let currentGirl = this.getRandomGirl();
+
+          let findBoyIndex = this.boys.findIndex((el) => el == currentBoy);
+          this.boys.splice(findBoyIndex, 1);
+
+          let findGirlIndex = this.girls.findIndex((el) => el == currentGirl);
+          this.girls.splice(findGirlIndex, 1);
+
+          return `${currentBoy} та ${currentGirl}`;
+        }
+        run() {
+          const time = 5000;
+          return setInterval(() => {
+            if (this.boys.length > 0 && this.girls.length > 0) {
+              alert(this.getCouple());
+            }
+          }, time);
+        }
+      }
+
+      let boys = ["Ivan", "Andrew", "Max", "Michle"];
+      let girls = ["Julia", "Olga", "Natalia", "Victoria"];
+
+      let danceDirector = new DanceDirector(boys, girls);
+      danceDirector.run();
+
+        // Задача 4. Розробити клас Baner
+      // Поля
+      // Масив об’єктів ( графічних зображень та посилань на сайти)
+
+      // методи
+      // Метод випадкового вибору об’єкта (графічного зображення та посилання)
+      // Метод виведення випадкового банера
+
+      class Baner {
+        constructor(initObjectsArr) {
+          this.objectsArr = initObjectsArr;
+        }
+        getRandomObject() {
+          const min = 0;
+          const max = this.objectsArr.length - 1;
+          let randomIndex = min + Math.floor(Math.random() * (max - min + 1));
+          console.log(randomIndex);
+          return this.objectsArr[randomIndex];
+        }
+        showRandomObject() {
+          let randomObject = this.getRandomObject();
+          document.write(`<div class="banner">
+          <a href="${randomObject.link}" class="banner__image">
+            <img src="../${randomObject.imageSource}" alt="Image">
+          </a>
+        </div>`);
+        }
+      }
+
+      let objectsArr = [
+        {
+          imageSource: "img/google.png",
+          link: "https://www.google.com/",
+        },
+        {
+          imageSource: "img/adidas.png",
+          link: "https://adidas.com.ua/",
+        },
+        {
+          imageSource: "img/comfy.jpeg",
+          link: "https://comfy.ua/",
+        },
+      ];
+      let baner = new Baner(objectsArr);
+      baner.showRandomObject();
+   </script>
+   </main>
+</script>
+</body>
+</html>
+
+
