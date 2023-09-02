@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+	//Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості
+	//							додатних, кількості від’ємних, кількість входжень деякого числа (статичні методи)
+    "use strict"
+						//Умова задачі: Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості від’ємних, кількість входжень деякого числа (статичні методи)
+						class Counter {
+							// знаходження кількості додатних чисел
+							static getPositiveNumQuantity(array) {
+								let positiveNums = array.reduce((sum, el) => (el > 0 ? sum + 1 : sum), 0)
+								return positiveNums
+							}
+							// знаходження кількості від’ємних чисел
+							static getNegativeNumQuantity(array) {
+								let negativeNums = array.reduce((sum, el) => (el <= 0 ? sum + 1 : sum), 0)
+								return negativeNums
+							}
+							// знаходження кількості входжень деякого числа
+							static getNumOccurencesQuantity(array, number) {
+								let numOccurences = array.reduce((sum, el) => (el === number ? sum + 1 : sum), 0)
+								return numOccurences
+							}
+						}
+						let array = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10]
+						let num = 5
+						document.write(`Масив: ${array} <br>`)
+						document.write(`Число: ${num} <br>`)
+						document.write(`Кількість додатних чисел: ${Counter.getPositiveNumQuantity(array)} <br>`)
+						document.write(`Кількість від’ємних чисел: ${Counter.getNegativeNumQuantity(array)} <br>`)
+						document.write(`Кількість входжень деякого числа: ${Counter.getNumOccurencesQuantity(array, num)}`)
+					
+
+                     //   Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було
+						//		створити тільки один екземпляр цього класу.
+                        "use strict"
+						//Умова задачі: Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було створити тільки один екземпляр цього класу.
+						class CompanyCar {
+							static car
+							constructor(driver, brand, number) {
+								if (CompanyCar.car) return CompanyCar.car
+								this.driver = driver
+								this.brand = brand
+								this.number = number
+								CompanyCar.car = this
+							}
+							toString() {
+								return `Водій: ${this.driver} <br>
+								Марка машини: ${this.brand} <br>
+								Номер машини: ${this.number} <br>`
+							}
+						}
+						let carExample = new CompanyCar("Bob", "Lexus", "AA1405AA")
+
+						document.write(carExample)
+
+						let carExample1 = new CompanyCar("Ben", "Toyota", "AO1807BC")
+						document.write(carExample1)
+
+                      //  Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма
+						//		нагадує про якусь подію (це просто текст) і також виводиться порядковий номер скільки раз вже
+						//		нагадування було. Зробити так, щоб неможна було зробити одночасно декілька
+						//		об’єктів-нагадувачів. Методи зупинки таймера, метод зміни повідомлення без зупинки таймера.
+                        "use strict"
+						//Умова задачі: Створити клас Нагадувач.
+						//  Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію (це просто текст) і також виводиться порядковий номер скільки раз вже нагадування було.
+						// Зробити так, щоб неможна було зробити одночасно декілька об’єктів-нагадувачів.
+						// Метод зупинки таймера
+						// метод зміни повідомлення без зупинки таймера
+						class Reminder {
+							static reminderExample
+							constructor(message, interval) {
+								if (Reminder.reminderExample) return Reminder.reminderExample
+								this.message = message
+								this.interval = interval
+								this.counter = 0
+								Reminder.reminderExample = this
+							}
+							run() {
+								this.intervalId = setInterval(() => {
+									this.counter++
+									document.write(`${this.counter})${this.message}<br>`)
+								}, this.interval)
+							}
+							stop() {
+								clearInterval(this.intervalId)
+							}
+							change(message) {
+								this.message = message
+							}
+						}
+						let r1 = new Reminder("Перемога", 1000)
+						r1.run()
+
+						setTimeout(() => {
+							r1.change("України")
+						}, 5000)
+
+						setTimeout(() => {
+							r1.stop()
+						}, 10000)    
+        //   Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження,
+				//				короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)).
+			//					Реалізувати розділи бібліотеки організувати додавання/вилучення книг та вибір книг за назвою,
+			//					за ПІБ автора, за видавництвом.
+            "use strict"
+						//Умова задачі: Особиста бібліотека. Картотека домашньої бібліотеки:
+						// Дані книги:
+						// 				назва книги,
+						// 				жанр,
+						// 				автори:
+						// 							піб,
+						// 							рік народження,
+						// 						   короткий опис
+						// 				видавництво:
+						// 							назва,
+						// 							реєстраційний номер,
+						// 							рік заснування.
+						// Бібліотека:
+						// 				додавання книг
+						// 				вилучення книг
+						// 			 	вибір книг за назвою,
+						// 				вибір книг за ПІБ автора
+						// 				вибір книг за видавництвом.
+						//
+						class Library {
+							constructor(section, bookList) {
+								this.section = section
+								this.bookList = bookList
+							}
+							// додавання книг
+							addBook(book) {
+								this.bookList.push(book)
+							}
+							// вилучення книг
+							deleteBook(title) {
+								this.bookList = this.bookList.filter((book) => book.title !== title)
+							}
+							// вибір книг за назвою
+							filterByTitle(title) {
+								return this.bookList.filter((book) => book.title === title)
+							}
+							// вибір книг за ПІБ автора
+							filterByFullName(fullName) {
+								return this.bookList.filter((book) => book.author.fullName === fullName)
+							}
+
+							// вибір книг за видавництвом
+							filterByPublisher(name) {
+								return this.bookList.filter((book) => book.publisher.publisherName === name)
+							}
+						}
+						class Book {
+							constructor(initData) {
+								this.author = new Author(initData)
+								this.publisher = new Publisher(initData)
+								this.title = initData.title
+								this.genre = initData.genre
+							}
+							toString() {
+								return `Назва книги: ${this.title}<br>
+								Жанр: ${this.genre}<br> 
+								Автори: ${this.author}<br>
+								Видавництво: ${this.publisher}<br>`
+							}
+						}
+						class Author {
+							constructor({ fullName, yearOfBirth, description }) {
+								this.fullName = fullName
+								this.yearOfBirth = yearOfBirth
+								this.description = description
+							}
+							toString() {
+								return `${this.fullName}<br>
+								Дата народження: ${this.yearOfBirth}<br>
+								Короткий опис: ${this.description}`
+							}
+						}
+						class Publisher {
+							constructor({ publisherName, regNumber, publisherYear }) {
+								this.publisherName = publisherName
+								this.regNumber = regNumber
+								this.publisherYear = publisherYear
+							}
+							toString() {
+								return `${this.publisherName}<br> 
+								Реєстраційний номер: ${this.regNumber}<br>
+								Рік заснування: ${this.publisherYear}<br>`
+							}
+						}
+
+						let bookList = [
+							new Book({
+								fullName: "Тарас Шевченко",
+								yearOfBirth: 1814,
+								description:
+									"Тарас Шевченко - безумовно найвидатніша особистість в історії української культури. Поет народився 9 березня 1814 року в селі Моринці Київської губернії в сім'ї кріпака. Діди і прадіди Тараса були козаками і брали активну участь у визвольних війнах. Особливий вплив на майбутнього автора «Кобзаря» справив дід Іван. Свого часу він брав участь у Коліївщині і розповів онукові багато подробиць про це повстання.",
+								title: "Щоденник",
+								genre: "Автобіографія",
+								publisherName: "Піраміда",
+								regNumber: "РН00",
+								publisherYear: 1995,
+							}),
+							new Book({
+								fullName: "Леся Українка",
+								yearOfBirth: 1871,
+								description:
+									"Леся Українка - відома українська поетеса, драматург і культурний діяч. Справжнє ім'я письменниці - Лариса Петрівна Косач-Квітка. Вона народилася 25 лютого 1871 року в Новоград-Волинську в родині відомих культурних діячів. Мати Лесі - відома письменниця, що писала під псевдонімом Олена Пчілка, активна учасниця жіночого руху. У сім'ї дуже часто збиралися різні українські культурні діячі, серед яких не в останню чергу дядько письменниці, Михайло Драгоманов. Він вплинув на Українку, опікав племінницю і допомагав їй. Ще в дитинстві дівчинка вивчила ряд іноземних мов, що дозволяло їй читати класичні та сучасні твори, а також займатися перекладами.",
+								title: "Вибране",
+								genre: "Поетичні твори",
+								publisherName: "Фоліо",
+								regNumber: "РН01",
+								publisherYear: 1990,
+							}),
+							new Book({
+								fullName: "Григорій Сковорода",
+								yearOfBirth: 1722,
+								description:
+									"Григорій Савич Сковорода (1722-1794) - видатний український філософ-містик, богослов, поет, поліглот, педагог, вніс значний вклад в східнослов'янську культуру. Автор байок, пісень, ряду філософських творів, серед яких «Сад божественних пісень», «Байки харківські», «Убогий жайворонок».",
+								title: "Літературні твори",
+								genre: "Художні твори",
+								publisherName: "Апріорі",
+								regNumber: "РН02",
+								publisherYear: 2002,
+							}),
+						]
+
+						let lib = new Library("Українська література", bookList)
+						console.log("Бібліотека:")
+						console.log(lib)
+
+						// Вивід на екран списку книжок і їх повна інформація
+						document.write(`Список книжок:<br><br> ${bookList} <hr><hr><br> Фільтри:<br><br> `)
+
+						// Додавання книги
+						lib.addBook(
+							new Book({
+								fullName: "Тарас Шевченко",
+								yearOfBirth: 1814,
+								description:
+									"Тарас Шевченко - безумовно найвидатніша особистість в історії української культури. Поет народився 9 березня 1814 року в селі Моринці Київської губернії в сім'ї кріпака. Діди і прадіди Тараса були козаками і брали активну участь у визвольних війнах. Особливий вплив на майбутнього автора «Кобзаря» справив дід Іван. Свого часу він брав участь у Коліївщині і розповів онукові багато подробиць про це повстання.",
+								title: "Кобзар",
+								genre: "Поетичні твори",
+								publisherName: "Піраміда",
+								regNumber: "РН00",
+								publisherYear: 1995,
+							})
+						)
+
+						console.log("Бібліотека після додавання книги:")
+						console.log(lib)
+
+						// Вилучення книги
+						lib.deleteBook("Літературні твори")
+						console.log("Бібліотека після вилучення книги:")
+						console.log(lib)
+
+						// Вибір книг за назвою
+						console.log("Вибір книг за назвою:")
+						console.log(lib.filterByTitle("Щоденник"))
+						document.write(`Вибір книг за назвою:<br> ${lib.filterByTitle("Щоденник")}`)
+
+						// Вибір книг за ПІБ автора
+						console.log("Вибір книг за ПІБ автора:")
+						console.log(lib.filterByFullName("Тарас Шевченко"))
+						document.write(`Вибір книг за ПІБ автора:<br> ${lib.filterByFullName("Тарас Шевченко")}`)
+
+						// Вибір книг за видавництвом
+						console.log("Вибір книг за видавництвом:")
+						console.log(lib.filterByPublisher("Фоліо"))
+						document.write(`Вибір книг за видавництвом:<br> ${lib.filterByPublisher("Фоліо")}`)
+
+
+        //	5. Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються
+		//						числа, які треба перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються
+		//						числа у заданому діапазоні, які треба додавати). Обидва класи надсилають результати тестування
+		//						об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів Приклад.
+		//						testsList= [ {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},
+		//						{firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7}, ] Можна створити
+		//						окремий клас TestData, який описує один такий тест і у якому будуть ці поля. Розробити клас
+		//						TestManager, який використовуючи ці класи за допомогою таймера періодично генерує якісь N
+		//						задач (рандомно вибираємо, що опитувати: додавання чи множення) і проводить опитування.
+		//						Результати тестування додаються в об’єкт History. Зробити так, щоб об'єкт такого класу можна
+		//						було створити тільки один. Коли зроблено ці N задач вивести усю історію на екран.
+        "use strict"
+						//Умова задачі: 5.	Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба додавати). Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів  Приклад.
+						// testsList= [
+						//    {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},
+						//    {firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},
+						// ]
+						// Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля.
+						// Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично генерує якісь N задач (рандомно вибираємо, що опитувати: додавання чи множення) і проводить опитування. Результати тестування додаються в об’єкт History.  Зробити так, щоб об'єкт такого класу можна було створити тільки один. Коли зроблено ці N задач вивести усю історію на екран.
+						
+						// Ця задача розглядалася на уроці, тут я її повторив, тому що вже сильно відстаю по домашкам :(
+						// Розробити TestData
+						class TestData {
+							constructor(testDataObj) {
+								Object.assign(this, testDataObj)
+							}
+							toString() {
+								return `Test: "${this.firstNumber}${this.operation}${this.secondNumber}"
+								user answer: ${this.userAnswer}, correct answer: ${this.correctAnswer}`
+							}
+						}
+						// Розробити MultChecker
+						class MultChecker {
+							constructor(minValue = 0, maxValue = 9) {
+								this.minValue = minValue
+								this.maxValue = maxValue
+							}
+							getRandomNumber(minValue, maxValue) {
+								minValue ??= this.minValue
+								maxValue ??= this.maxValue
+								return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+							}
+							// метод, який повертає об'єкт такого вигляду{firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5}
+							test() {
+								const firstNumber = this.getRandomNumber()
+								const secondNumber = this.getRandomNumber()
+								const correctAnswer = firstNumber * secondNumber
+								const userAnswer = parseInt(prompt(`${firstNumber}*${secondNumber} = `))
+								if (correctAnswer === userAnswer) alert("Правильно")
+								else alert("Неправильно")
+								return new TestData({
+									firstNumber,
+									secondNumber,
+									operation: "*",
+									userAnswer,
+									correctAnswer,
+								})
+							}
+						}
+						// Розробити AddChecker
+						class AddChecker {
+							constructor(minValue = 0, maxValue = 9) {
+								this.minValue = minValue
+								this.maxValue = maxValue
+							}
+							getRandomNumber(minValue, maxValue) {
+								minValue ??= this.minValue
+								maxValue ??= this.maxValue
+								return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+							}
+							// метод, який повертає об'єкт такого вигляду{firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5}
+							test() {
+								const firstNumber = this.getRandomNumber()
+								const secondNumber = this.getRandomNumber()
+								const correctAnswer = firstNumber + secondNumber
+								const userAnswer = parseInt(prompt(`${firstNumber}+${secondNumber} = `))
+								if (correctAnswer === userAnswer) alert("Правильно")
+								else alert("Неправильно")
+								return new TestData({
+									firstNumber,
+									secondNumber,
+									operation: "+",
+									userAnswer,
+									correctAnswer,
+								})
+							}
+						}
+						// Розробити History
+						class History {
+							constructor() {
+								this.testList = []
+							}
+							addNewTest(testObj) {
+								this.testList.push(new TestData(testObj))
+							}
+							printTestList() {
+								for (const test of this.testList) {
+									document.write(test)
+									document.write("<hr>")
+								}
+							}
+						}
+						// Розробити TestManager
+						class TestManager {
+							constructor(totalTestcount, intervalBetweenTests, minValue = 0, maxValue = 9) {
+								this.totalTestcount = totalTestcount
+								this.intervalBetweenTests = intervalBetweenTests
+								this.testsNumberDone = 0
+								this.multChecker = new MultChecker()
+								this.addChecker = new AddChecker(minValue, maxValue)
+								this.history = new History()
+							}
+							doTest() {
+								let testResult
+								if (Math.random() > 0.5) testResult = this.addChecker.test()
+								else testResult = this.multChecker.test()
+								this.history.addNewTest(testResult)
+								this.testsNumberDone++
+								if (this.testsNumberDone < this.totalTestcount)
+									setTimeout(() => {
+										this.doTest()
+									}, this.intervalBetweenTests)
+								else this.history.printTestList()
+							}
+							run() {
+								// this.doTest()
+								setTimeout(() => {
+									this.doTest()
+								}, this.intervalBetweenTests)
+							}
+						}
+						// Викорстати TestManager
+						const manager = new TestManager(3, 3000, 2, 10)
+						manager.run()
+   </script>
+   </main>
+</script>
+</body>
+</html>
+
+
