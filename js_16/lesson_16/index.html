@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/script.js"></script>
+</head>
+<body>
+   <body>
+      <script>
+	//  Задача 1. Створити клас TDate для роботи із датами у форматі “день.місяць.рік”.
+   // Дата представляється структурою із трьома полями.
+     //   Реалізувати методи збільшення/зменшення дати на певну кількість днів,
+     //   місяців чи років. Введення та виведення дати
+      //  реалізувати за допомогою методу toString.
+ // 1 variant
+ class TDate {
+            #year
+            #month
+            #day
+            constructor(initYear, initMonth, initDay) {
+                this.Year = initYear
+                this.Month = initMonth
+                this.Day = initDay
+            }
+            get Year() {
+                return this.#year
+            }
+            set Year(newYear) {
+                if (newYear < 0) throw new Error('Не коректне значення')
+                this.#year = newYear
+            }
+            get Month() {
+                return this.#month
+            }
+            set Month(newMonth) {
+                if (newMonth < 1 || newMonth > 12) throw new Error('Не коректне значення')
+                this.#month = newMonth
+            }
+            get Day() {
+                return this.#day
+            }
+            set Day(newDay) {
+                if (newDay < 1 || newDay > 31) throw new Error('Не коректне значення')
+                this.#day = newDay
+            }
+            addYear(addYear) {
+                return this.Year += addYear
+            }
+            reduceYear(reduceYear) {
+                return this.Year -= reduceYear
+            }
+            addMonth(addMonth) {
+                let currentMonth = this.Month + addMonth
+                this.Year += Math.floor(currentMonth / 12)
+                this.Month = (currentMonth % 12)
+                if (this.Month > 12) {
+                    this.Month %= 12
+                    this.Year += Math.floor(this.Month / 12)
+                }
+            }
+            reduceMonth(reduceMonth) {
+                const totalMonths = this.Year * 12 + this.Month - 1
+                const newTotalMonths = totalMonths - reduceMonth
+                this.Year = Math.floor(newTotalMonths / 12)
+                this.Month = (newTotalMonths % 12) + 1
+            }
+            addDay(addDay) {
+                let currentDay = this.Day + addDay
+                this.Month += Math.floor(currentDay / 31)
+                this.Day = (currentDay % 31)
+                if (this.Month > 12) {
+                    this.Month %= 12
+                    this.Year += Math.floor(this.Month / 12)
+                }
+            }
+            reduceDay(reduceDay) {
+                let currentDay = this.Day - reduceDay;
+                while (currentDay < 1) {
+                    this.Month--;
+                }
+                this.Day = currentDay;
+            }
+            toString() {
+                return `Year: ${this.Year}, Month: ${this.Month}, Day: ${this.Day}`
+            }
+        }
+        const userYear = parseInt(prompt('Enter Year'))
+        const userMonth = parseInt(prompt('Enter Month'))
+        const userDay = parseInt(prompt('Enter Day'))
+        let tDate = new TDate(userYear, userMonth, userDay)
+        document.write(tDate + '<br>')
+  
+        let questionPlus = confirm('Бажаєте змінити дату (збільшити)')
+        let questionMinus
+        if (questionPlus === false) { questionMinus = confirm('Бажаєте змінити дату (Зменшити)') }
+        if (questionPlus) {
+            const newUserYear = parseInt(prompt('Enter Year'))
+            const newUserMonth = parseInt(prompt('Enter Month'))
+            const newUserDay = parseInt(prompt('Enter Day'))
+            tDate.addYear(newUserYear)
+            tDate.addMonth(newUserMonth)
+            tDate.addDay(newUserDay)
+            document.write(tDate)
+        }
+        if (questionMinus) {
+            const newUserYear = parseInt(prompt('Enter Year'))
+            const newUserMonth = parseInt(prompt('Enter Month'))
+            const newUserDay = parseInt(prompt('Enter Day'))
+            tDate.reduceYear(newUserYear)
+            tDate.reduceMonth(newUserMonth)
+            tDate.reduceDay(newUserDay)
+            document.write(tDate)
+        }
+
+        //  Задача 2. Створити клас TMoney для роботи з грошовими сумами.
+
+       // Сума повинна зберігатися у вигляді доларового еквіваленту.
+
+//Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях,
+//та визначення курсу долара, при якому сума у гривнях збільшиться на 100.
+
+//Курс долара зберігати в окремому полі.
+
+class TMoney {
+            #dollarBalance
+            constructor(sumGRNBalance, dollarRate) {
+                this.dollarRate = dollarRate
+                this.Balance = sumGRNBalance
+            }
+            get Balance() {
+                return this.#dollarBalance * this.dollarRate
+            }
+            set Balance(grnSum) {
+                if (grnSum < 0) throw new Error('error')
+                this.#dollarBalance = grnSum / this.dollarRate
+            }
+            addMoney(grnSum) {
+                if (grnSum < 0) throw new Error('error')
+                return this.Balance += grnSum
+            }
+            getMoney(grnSum) {
+                if (grnSum < 0) throw new Error('error')
+                if (grnSum > this.Balance) throw new Error('error')
+                return this.Balance -= grnSum
+            }
+            getTarget100Rate() {
+                return (this.Balance + 100) / this.#dollarBalance
+            }
+            toString() {
+                return `${this.Balance}`
+            }
+        }
+        let money = new TMoney(4000, 40)
+        document.write(`${money}<br>`)
+        console.log(money.addMoney(40))
+        console.log(money.getMoney(80))
+        console.log(money.getTarget100Rate())
+
+//Задача 3. Об’єкт “Фірма” (використати члени-класи)
+//поля
+    //    назва фірми;
+    //    дата заснування (рік, місяць);
+    //    послуги (назва послуги, вартість, термін виконання);
+     //   адреси філіалів (країна, місто, вулиця, номер будинку);
+//методи
+//визначення кількості років існування фірми;
+       // виведення всіх філіалів фірми у вказаному місті;
+      //  виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+
+      class Firma {
+            #name
+            constructor(name, year, month) {
+                this.Name = name
+                this.establishment = [year, month]
+                this.service = []
+                this.filial = []
+            }
+            get Name() {
+                return `${this.#name}`
+            }
+            set Name(newName) {
+                if (newName.length < 1) throw new Error
+                this.#name = newName
+            }
+            addService(nameService, cost, deadline) {
+                const service = { nameService, cost, deadline }
+                this.service.push(service)
+
+            }
+            addFilial(country, city, street, homeNum) {
+                let address = { country, city, street, homeNum }
+                this.filial.push(address)
+            }
+            existenceFirm() {
+                const year = 2023
+                return year - this.establishment[0]
+            }
+            withdrawalOfBranches(city) {
+                for (const item of this.filial) {
+                    if (item.city === city) console.log(item)
+                }
+            }
+            withdrawalService(cost, day) {
+                for (const item of this.service) {
+                    if (item.cost === cost && item.deadline === day) console.log(item)
+
+                }
+            }
+            toString() {
+                return `name ${this.Name} year:${this.establishment[0]} month:${this.establishment[1]} `
+            }
+        }
+        let firma1 = new Firma('mersedes', 2010, 7)
+        firma1.addService('wv', 5000, 4)
+        firma1.addService('audi', 4500, 5)
+        firma1.addService('двз', 25000, 90)
+        firma1.addService("шасі", 16000, 15)
+        firma1.addService("кпп", 6500, 30);
+        firma1.addFilial("Україна", "Київ", "Драгоманова ", "5");
+        firma1.addFilial("Україна", "Київ", "Ревуцького", "9");
+        firma1.addFilial("Україна", "Київ", "Ахматової", "4");
+
+        console.log(firma1)
+        document.write(` ${firma1.existenceFirm()} Років існує фірма ${firma1.name} <br>`)
+        firma1.withdrawalOfBranches('Київ')
+        firma1.withdrawalService(4500, 5)
+
+        //Задача. Створити клас TBankomat, який моделює роботу банкомата.
+    //Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень.
+    //Реалізувати методи знаходження максимальної та мінімальної сум,
+    //які може видати банкомат, та метод зняття деякої суми.
+    class Banknote {
+            constructor(nominal, count) {
+                this.nominal = nominal,
+                    this.count = count
+            }
+        }
+        class TBankomat {
+            constructor(banknotes) {
+                this.banknotes = banknotes
+            }
+            geMin() {
+                return this.banknotes.find(el => el.count > 0)?.nominal || 0
+            }
+            getMax() {
+                return this.banknotes.reduce((prevSum, el) => prevSum + el.nominal * el.count, 0)
+            }
+            withdrawalMoney(sum) {
+                let ollSum = this.getMax()
+                if (ollSum < sum) throw new Error
+                else if (sum % 5 === 0) {
+                    ollSum -= sum
+                    alert('Withdrawal successful')
+                    alert(`залишок у банкоматі ${ollSum}`)
+                }
+                else throw new Error
+
+            }
+        }
+        const banknotes = [
+            new Banknote(10, 5),
+            new Banknote(10, 20),
+            new Banknote(20, 50),
+            new Banknote(100, 200),
+            new Banknote(200, 20),
+            new Banknote(20, 40),
+        ]
+        let bankomat = new TBankomat(banknotes)
+        console.log(bankomat)
+        console.log(bankomat.geMin())
+        console.log(bankomat.getMax())
+        let userWithdrawalMoney = parseFloat(prompt('введіть суму для зняття'))
+        bankomat.withdrawalMoney(userWithdrawalMoney)
+   </script>
+   </main>
+</script>
+</body>
+</html>
+
+
